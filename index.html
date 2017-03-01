@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>React Dashboard</title>
+	<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://npmcdn.com/react-router@2.4.0/umd/ReactRouter.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mdb.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+
+	var {
+		Router, 
+		Route, 
+		IndexRoute,
+		IndexLink,
+		Link
+	} = ReactRouter;
+
+	var Logo = React.createClass({
+		change(page){
+			this.props.change(page);
+		},
+		render(){
+			return(
+				<div className="logo col-md-2">
+					<img className="logo-img" src="img/Marble-logo1.png" />
+					<div className="nav menu ">
+						<ul className="sidemenu">
+						<li className={(this.props.currentPage === 'dashboard') ? 'active' : ' '}><a onClick={this.change.bind(this, 'dashboard')} href="#"><Link to="/">Dashboard </Link></a></li>
+						<li className={(this.props.currentPage === 'credit score') ? 'active' : ' '}><a onClick={this.change.bind(this, 'credit score')} href="#"><Link to="/credit-score"> Credit Score </Link></a></li>
+						<li className={(this.props.currentPage === 'budget') ? 'active' : ' '}><a onClick={this.change.bind(this, 'budget')} href="#"><Link to="/budget"> Budget </Link></a></li>
+						<li className={(this.props.currentPage === 'assets') ? 'active' : ' '}><a onClick={this.change.bind(this, 'assets')} href="#"><Link to="/assets"> Assets </Link></a></li>
+						<li className={(this.props.currentPage === 'accounts') ? 'active' : ' '}><a onClick={this.change.bind(this, 'accounts')} href="#"><Link to="/accounts"> Accounts </Link></a></li>
+						<li className={(this.props.currentPage === 'services') ? 'active' : ' '}><a onClick={this.change.bind(this, 'services')} href="#"><Link to="/services"> Services </Link></a></li>
+						<li className={(this.props.currentPage === 'contact')? 'active' : ' '}><a onClick={this.change.bind(this, 'contact')} href="#"><Link to="/contact"> Contact </Link></a></li>
+					</ul>
+					</div>
+				</div>
+			);
+		}
+	});
+
+	var TopNav = React.createClass({
+		render(){
+			return(
+				<div className="top-nav  col-md-10">
+					<nav role="navigation" className="navigation">
+						<div className="welcome-title">
+							<h5 className="welcome">Hello, you are viewing {this.props.currentPage} </h5>
+						</div>
+						<div className="navbar-right">
+							<ul className="nav navbar-nav no-borders">
+								<li className="dropdown"> 
+									<a className="dropdown-toggle"href="#" data-toggle="dropdown">
+										<i className="fa fa-gear text-primary"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			);
+		}
+	});
+
+
+	var HomeCards = React.createClass({
+		render(){
+		return(
+			<div className="the-cards row">
+				<div className="col-md-4">
+					<div className="card">
+						<div className="card-block">
+							<div className="panel-heading">4 Pillars Consulting </div>
+							<h4 className="panel-subtitle">Imagine your debt-free future.</h4>
+								<div className="card-body row">
+								<div className="col-sm-12">
+									<p className="card-text"> 
+									We help reduce your debt by up to 80% and get you back on track. 
+									Our plans have helped thousands of families and individuals.
+									50+ offices across Canada. Local support.
+									 </p>
+								</div>
+								</div>
+							<div className="panel-footer"> 
+								<a href="#"> Speak to an expert in confidence. </a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="col-md-4">
+					<div className="card">
+						<div className="card-block">
+							<div className="panel-heading">Maple Receipt Tracker </div>
+							<h4 className="panel-subtitle">The Maple Receipt Tracker App</h4>
+								<div className="card-body row">
+								<div className="col-sm-12">
+									<p className="card-text"> 
+									The fast and easy way to capture expenses made with cash. 
+									Document purchases using your mobile device's camera and 
+									sync the transaction with your budget tracker.
+									 </p>
+								</div>
+								</div>
+							<div className="panel-footer"> 
+								<a href="#"> Download Maple Receipt Tracker </a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="col-md-4">
+					<div className="card">
+						<div className="card-block">
+							<div className="panel-heading2">Personal Net Worth </div>
+							<h4 className="panel-subtitle">Track your Personal Net Worth Through your assets and liablities</h4>
+								<div className="card-body row">
+								<div className="col-sm-12">
+									<p className="card-text"> 
+									Once you have added all your assets and liabilities, 
+									you can view a net worth report that corresponds with your 
+									spending and saving activity.
+									 </p>
+								</div>
+								</div>
+							<div className="panel-footer"> 
+								<a href="#"> Realize the impact of your debts</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			);
+		}
+	});
+
+	var CreditScore = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+					<div className="col-md-6">
+						<div className="card">
+							<div className="card-block">
+							<div className="panel-headingF">TransUnion Credit Score</div>
+							<h4 className="panel-subtitle">Sign up for a TransUnion Credit Score</h4>
+							<div className="card-body">
+							<form action className="registerForm" method="post">
+								<div className="row">
+									<div className="form-group col-lg-4">
+										<label>First Name</label>
+										<input type="text" value="" className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										<label>Bances Name</label>
+										<input type="text" value="" className="form-control" />
+									</div>
+									<div className="clearfix">
+									</div>
+									<div className="form-group col-lg-4">
+										<label>Date of Birth</label>
+										<input type="text" value="08/07/1991" className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										<label>S.I.N. (optional)</label>
+										<input type="text" value="" placeholder="999-999-999" className="form-control" />
+									</div>
+									<div className="form-group col-lg-8">
+										<label>Address</label>
+										<input type="text" value="" placeholder="1234 Montecito Dr." className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										<label>City</label>
+										<input type="text" value="" className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										<label>Province</label>
+										<select name="province" id="province" className="form-control">
+											<option value="AB">Alberta</option>
+											<option value="BC">British Columbia</option>
+											<option value="MB">Manitoba</option>
+											<option value="NB">New Brunswick</option>
+											<option value="NL">Newfoundland</option>
+											<option value="NS">Nova Scotia</option>
+											<option value="NT">Northwest Territories</option>
+											<option value="NU">Nunavut</option>
+											<option value="ON">Ontario</option>
+											<option value="PE">Prince Edward Island</option>
+											<option value="QC">Quebec</option>
+											<option value="SK">Saskatchewan</option>
+											<option value="YT">Yukon</option>
+										</select>
+									</div>
+									<div className="form-group col-lg-4">
+										<label>Postal Code</label>
+										<input type="text" value="VCN 3L0" className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										<label>Phone Number</label>
+										<input type="text" value="1234567890" placeholder="(999) 999-9999" className="form-control" />
+									</div>
+									<div className="form-group col-lg-4">
+										
+									</div>
+								</div>
+							</form>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+	});
+
+	var Budget = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+					<div className="col-md-12">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Budget - Add Income</div>
+								<div className="card-body row">
+									<div className="col-md-3">
+									 	<p className="card-text budget"> 
+									Fill in all the fields as accurately as you can. Only dollar amounts are needed. Leave fields blank for those not applicable
+									</p>
+									</div>
+									<div className="col-md-9">
+										<div className="row">
+											<h4>Monthly Income </h4>
+											<div className="clearfix"> </div>
+											<div className="form-group col-sm-4">
+												<label>Paychecks/Salary </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+											<div className="form-group col-sm-4">
+												<label>Other Income </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+											<div className="form-group col-sm-4">
+												<label>Investment Income </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+											<div className="form-group col-sm-4">
+												<label>Consulting </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+											<div className="form-group col-sm-4">
+												<label>Retirement Income </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+											<div className="form-group col-sm-4">
+												<label>Sales </label>
+												<input type="number" name="income" className="form-control" />
+											</div>
+										</div>
+									<div className="text-right income-btn">
+										<button className="btn btn-info" type="button">Save Income</button>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+	});
+
+	var Assets = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+					<div className="col-md-12">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Assets and Liabilities (Networth)</div>
+								<div className="card-body">
+									<p className="card-text"> 
+									Add in all your Assets and Liabilities. Only dollar amounts are needed. This will help calculate your Networth.
+									Once completed, click on the save icon  in the top right corner. If you wish to export this information as a PDF file, click on the  icon in the top right corner, or to save it as a CSV file, click on the  icon.
+									The darker grey boxes are automatically added from your Linked Accounts.
+									</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+	});
+
+	var Accounts = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+				<div className="col-md-12">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Linked Accounts</div>
+								<div className="card-body">
+									<p className="card-text"> 
+									You currently do not have any accounts linked. 
+									</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+
+	});
+
+	var Services = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+					<div className="col-md-12">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Services Available</div>
+								<h4 className="card-text">Select which Service Widgets you want to show in the Dashboard.</h4>
+								<div className="the-cards row">
+								<div className="col-md-4">
+									<div className="card">
+										<div className="card-block">
+											<div className="panel-heading2">TransUnion Credit Score</div>
+											<div className="card-body">
+												<p className="card-text"> 
+												View your Transunion Credit Score
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-md-4">
+									<div className="card">
+										<div className="card-block">
+											<div className="panel-heading2">4 Pillars Consulting</div>
+											<div className="card-body">
+												<p className="card-text"> 
+												Help reduce your debt by 80%
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-md-4">
+									<div className="card">
+										<div className="card-block">
+											<div className="panel-heading2">Budget Tracker</div>
+											<div className="card-body">
+												<p className="card-text"> 
+												View your Budget
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div className="the-cards row">
+								<div className="col-md-4">
+									<div className="card">
+										<div className="card-block">
+											<div className="panel-heading2">Loan Information</div>
+											<div className="card-body">
+												<p className="card-text"> 
+												Show information on your Marble Loan
+
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-md-4">
+									<div className="card">
+										<div className="card-block">
+											<div className="panel-heading2">Personal Networth</div>
+											<div className="card-body">
+												<p className="card-text"> 
+												Show your Networth month by month
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+
+	});
+
+	var Contact = React.createClass({
+		render(){
+			return(
+				<div className="the-cards row">
+				<div className="col-md-6">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Contact Maple Financial</div>
+								<h4 className="panel-subtitle">Fill out the form below</h4>
+								<div className="card-body">
+									<form method="post" className="form-horizontal">
+										<div className="form-group">
+											<label className="col-sm-2 control-label">Subject </label>
+											<div className="col-sm-10">
+												<input type="text" name="subject" className="form-control"/>
+											</div>
+										</div>
+										<div className="form-group">
+											<label className="col-sm-2 control-label">Message</label>
+											<div className="col-sm-10">
+												<textarea name="message" className="form-control"></textarea>
+											</div>
+										</div>
+										<div className="form-group">
+											<div className="col-sm-8 col-sm-offset-2">
+												<input type="submit" name="submit" className="btn btn-info" value="Send Message"/>
+												<button className="btn btn-default"> Cancel </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div className="col-md-6">
+						<div className="card">
+							<div className="card-block">
+								<div className="panel-headingF">Corporate Office</div>
+								<div className="card-body">
+									<p className="card-text"> 
+									<h4 className="panel-subtitle">MLI Marble Lending, Inc. </h4>
+
+									Address: 1402 - 3166 Potter Street
+									<br/>
+									Vancouver, BC V6E 3Z3
+									<br/>
+									T: 604-670-2611 
+									<br/>
+									W: MarbleFinancial.ca 
+									</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				);
+		}
+	});
+
+	var App = React.createClass({
+		handleChange(page){
+			this.setState({currentPage:page})
+		}, 
+		getInitialState(){
+			return {
+				currentPage: 'dashboard'
+			}
+		},
+		render(){
+			return(
+				<div className="container-fluid app">
+					<Logo currentPage={this.state.currentPage} change={this.handleChange} />
+					<TopNav currentPage={this.state.currentPage} />
+					<div className="container-fluid mainbody">
+						{this.props.children}
+					</div>
+				</div>
+			);
+		}
+	});
+
+
+	ReactDOM.render(
+		<Router>
+			<Route path="/" component={App}>
+				<IndexRoute component={HomeCards} />
+				<Route path="credit-score" component={CreditScore} />
+				<Route path="budget" component={Budget} />
+				<Route path="assets" component={Assets} />
+				<Route path="accounts" component={Accounts} />
+				<Route path="services" component={Services} />
+				<Route path="contact" component={Contact} />
+			</Route>
+ 		</Router>,
+		document.getElementById('root'));
+	</script>
+</body>
+</html>
